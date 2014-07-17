@@ -1,0 +1,10 @@
+# python
+venv
+*.pyc
+
+# django
+staticfiles
+local_settings.py
+
+# keys
+.env
