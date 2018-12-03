@@ -9,7 +9,7 @@ class DumpSerializer(ModelSerializer):
         fields = ['id', 'data', 'created']
 
     def __init__(self, *args, data=None, **kwargs):
-        if data:
+        if data is not None:
             return super().__init__(*args, data={'data': data}, **kwargs)
         
         return super().__init__(*args, **kwargs)

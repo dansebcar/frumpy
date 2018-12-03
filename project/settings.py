@@ -36,9 +36,11 @@ INSTALLED_APPS = [
     'dcc',
     # third party
     'django_extensions',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -135,6 +137,8 @@ REST_FRAMEWORK = {
 
 LOGIN_REDIRECT_URL = 'fpy:home'
 LOGOUT_REDIRECT_URL = 'fpy:home'
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 try:
     from .local_settings import *
