@@ -12,6 +12,7 @@ pudb = "*"
 requests = "*"
 djangorestframework = "*"
 factory-boy = "*"
+"psycopg2-binary" = "*"
 
 [requires]
 python_version = "3.6"

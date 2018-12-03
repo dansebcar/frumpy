@@ -21,29 +21,22 @@ DEBUG = False
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
-DJANGO_APPS = [
+INSTALLED_APPS = [
+    # django
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-]
-
-LOCAL_APPS = [
-    'dictapp',
-    'register',
-]
-
-
-THIRD_PARTY_APPS = [
+    # local
+    'fpy',
+    'dcc',
+    # third party
     'django_extensions',
 ]
-
-INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -82,14 +75,13 @@ WSGI_APPLICATION = 'project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.getenv('DB_NAME', 'dictapp'),
-        'USER': 'dictapp',
+        'NAME': os.getenv('DB_NAME', 'frumpy'),
+        'USER': 'frumpy',
         'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -136,11 +128,13 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-    )
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 100,
 }
 
-LOGIN_REDIRECT_URL = 'entry-list'
-LOGOUT_REDIRECT_URL = 'entry-list'
+LOGIN_REDIRECT_URL = 'fpy:home'
+LOGOUT_REDIRECT_URL = 'fpy:home'
 
 try:
     from .local_settings import *

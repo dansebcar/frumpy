@@ -8,8 +8,8 @@ User = get_user_model()
 
 class SignupView(FormView):
     form_class = UserCreationForm
-    template_name = 'register/signup.html'
-    success_url = reverse_lazy('entry-list')
+    template_name = 'registration/login.html'
+    success_url = reverse_lazy('fpy:home')
 
     def form_valid(self, form):
         user = form.save()

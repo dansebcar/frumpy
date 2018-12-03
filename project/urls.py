@@ -2,11 +2,8 @@ from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path
 
-import dictapp.views as views
-
 urlpatterns = [
-    path('', views.EntryList.as_view(), name='entry-list'),
-    path('api/', include('dictapp.urls', namespace='api')),
+    path('', include('fpy.urls', namespace='fpy')),
+    path('dcc/', include('dcc.urls', namespace='dcc')),
     path('admin/', admin.site.urls),
-    path('registration/', include('register.urls', namespace='register')),
 ]
