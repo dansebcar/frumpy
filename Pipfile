@@ -12,8 +12,9 @@ pudb = "*"
 requests = "*"
 djangorestframework = "*"
 factory-boy = "*"
-"psycopg2-binary" = "*"
 django-cors-headers = "*"
+"django-i18nfield" = "*"
+pyyaml = "*"
 
 [requires]
 python_version = "3.6"

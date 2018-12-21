@@ -1,0 +1,4 @@
+- model: fpy.topic
+  pk: 1
+  fields:
+    name: '{"de": "Lokale Präpositionen", "en": "Prepositions of place"}'
