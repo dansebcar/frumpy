@@ -1,0 +1,10 @@
+@import "shadow-scss/shadow.scss";
+
+@import "partials/vars";
+
+.footer {
+  @include shadow-t;
+  @include nav;
+
+  border-top: 2px solid $gray-3;
+}

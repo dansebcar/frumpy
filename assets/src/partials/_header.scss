@@ -1,0 +1,10 @@
+@import "shadow-scss/shadow.scss";
+
+@import "partials/vars";
+
+.header {
+  @include shadow-b;
+  @include nav;
+
+  border-bottom: 2px solid $gray-3;
+}

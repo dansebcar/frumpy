@@ -1,0 +1,9 @@
+<header class="header">
+  {% for page in pages %}
+    <a
+      class="header__link"
+      href="{% url page.name %}"
+      {% if page.current %}data-current{% endif %}
+    >{{ page.label }}</a>
+  {% endfor %}
+</header>

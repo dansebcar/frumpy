@@ -2,3 +2,33 @@
   pk: 1
   fields:
     name: '{"de": "Lokale Präpositionen", "en": "Prepositions of place"}'
+    hint: nach, in, zu, auf, an
+    level: B1
+- model: fpy.topic
+  pk: 2
+  fields:
+    name: '{"de": "Verben mit Dativ und Akkusativ", "en": "Verbs taking dative and accusative"}'
+    hint: Artikel oder Possessivpronomen
+    level: B1
+- model: fpy.topic
+  pk: 3
+  fields:
+    name: '{"de": "Reflexive Verben mit Dativ und Akkusativ", "en": "Reflexive verbs taking dative and accusative"}'
+    level: B1
+- model: fpy.topic
+  pk: 4
+  fields:
+    name: '{"de": "Präpositionen mit Dativ und Akkusativ", "en": "Prepositions taking dative and accusative"}'
+    hint: Artikel oder Possessivpronomen
+    level: B1
+- model: fpy.topic
+  pk: 5
+  fields:
+    name: '{"de": "Verben mit Präpositionen", "en": "Verbs with prepositions"}'
+    level: B1
+- model: fpy.topic
+  pk: 6
+  fields:
+    name: '{"de": "Nebensätze", "en": "Auxilliary clauses"}'
+    hint: weil, obwol, dass, wenn, trotzdem
+    level: B1

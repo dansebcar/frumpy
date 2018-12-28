@@ -1,0 +1,13 @@
+{% load i18n %}
+
+<footer class="footer">
+  {% for lang in language_links %}
+    <a
+      class="footer__link"
+      href="{{ lang.path }}"
+      {% if lang.current %}data-current{% endif %}
+    >
+      {{ lang.label }}
+    </a>
+  {% endfor %}
+</footer>

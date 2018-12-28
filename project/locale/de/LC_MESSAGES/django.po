@@ -1,0 +1,95 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-12-27 23:43+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: fpy/context_processors.py:50
+msgid "Topics"
+msgstr "Themen"
+
+#: fpy/context_processors.py:51
+msgid "Logout"
+msgstr "Aussloggen"
+
+#: fpy/context_processors.py:55 fpy/templates/registration/login.html:14
+msgid "Login"
+msgstr "Einloggen"
+
+#: fpy/context_processors.py:56
+msgid "Signup"
+msgstr "Anmelden"
+
+#: fpy/context_processors.py:70
+msgid "Home"
+msgstr "Start"
+
+#: fpy/models.py:35
+msgid "A1 Breakthrough"
+msgstr "A1 Einstieg"
+
+#: fpy/models.py:36
+msgid "A2 Waystage"
+msgstr "A2 Grundlagen"
+
+#: fpy/models.py:37
+msgid "B1 Threshold"
+msgstr "B1 Mittelstufe"
+
+#: fpy/models.py:38
+msgid "B2 Vantage"
+msgstr "B2 gute Mittelstufe"
+
+#: fpy/models.py:39
+msgid "C1 Proficiency"
+msgstr "C1 fortgeschrittene Kenntnisse"
+
+#: fpy/models.py:40
+msgid "C2 Mastery"
+msgstr "C2 exzellente Kentnisse"
+
+#: fpy/models.py:43 fpy/models.py:57 fpy/models.py:68
+msgid "name"
+msgstr "Name"
+
+#: fpy/models.py:44 fpy/models.py:69
+msgid "hint"
+msgstr "Hinweis"
+
+#: fpy/models.py:45
+msgid "level"
+msgstr ""
+
+#: fpy/serializers.py:24
+msgid "Not a dict containing all supported languages"
+msgstr "Das ist kein dict, der enthalt die unterstützte Sprachen"
+
+#: fpy/validators.py:17
+msgid "Contains unmatched opening bracket"
+msgstr "Enthalt eine unpaarige linke Klammer"
+
+#: fpy/validators.py:23
+msgid "Does not contain brackets"
+msgstr "Enthalt keine Klammern"
+
+#: project/settings.py:117
+msgid "English"
+msgstr "Englisch"
+
+#: project/settings.py:118
+msgid "German"
+msgstr "Deutsch"

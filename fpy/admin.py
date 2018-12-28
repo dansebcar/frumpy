@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.forms import ModelForm
-from django.utils.translation import get_language_from_request
+from django.utils.translation import get_language
 from i18nfield.forms import I18nTextInput
 
 from fpy.models import Dump, Card, Info, Topic, Win, Fail
@@ -13,7 +13,7 @@ class I18nAdmin(admin.ModelAdmin):
     i18n_widgets = []
 
     def get_search_fields(self, request):
-        lang = get_language_from_request(request)
+        lang = get_language()
         return [
             *filter(None, self.search_fields),
             *map(lambda k: f'{k}__{lang}', self.i18n_search_fields),

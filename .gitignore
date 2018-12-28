@@ -5,6 +5,13 @@ venv
 # django
 staticfiles
 local_settings.py
+*.mo
 
 # keys
 .env
+
+# node
+node_modules
+
+# tmp
+*~

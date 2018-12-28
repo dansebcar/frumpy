@@ -2,16 +2,25 @@ from django.contrib.auth import get_user_model
 from django.contrib.postgres.fields.jsonb import JSONField
 from django.db import models
 from django.utils import timezone
-from i18nfield.fields import I18nCharField
+from django.utils.translation import gettext_lazy as _
+from i18nfield.fields import I18nTextField
 
-from fpy.managers import InteractionManager
+from fpy import managers, validators
 
 User = get_user_model()
 
 
-class Dump(models.Model):
-    data = JSONField()
+class TimeStampedModel(models.Model):
     created = models.DateTimeField(default=timezone.now)
+    modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
+        ordering = ['-created']
+
+
+class Dump(TimeStampedModel):
+    data = JSONField()
 
     class Meta:
         ordering = ['-created']
@@ -21,27 +30,46 @@ class Dump(models.Model):
 
 
 class Topic(models.Model):
-    name = I18nCharField()
-    hint = models.CharField(max_length=60)
+    LEVELS = [
+        ('A1', _('A1 Breakthrough')),
+        ('A2', _('A2 Waystage')),
+        ('B1', _('B1 Threshold')),
+        ('B2', _('B2 Vantage')),
+        ('C1', _('C1 Proficiency')),
+        ('C2', _('C2 Mastery')),
+    ]
+
+    name = I18nTextField(_('name'))
+    hint = models.TextField(_('hint'), blank=True)
+    level = models.CharField(_('level'), max_length=2, choices=LEVELS)
+
+    objects = managers.TopicSet.as_manager()
+
+    def __str__(self):
+        return f'{self.name}'
+
+    class Meta:
+        ordering = ['id']
+
+
+class Info(TimeStampedModel):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    name = I18nTextField(_('name'))
 
     def __str__(self):
         return f'{self.name}'
 
 
-class Info(models.Model):
-    name = I18nCharField()
-
-    def __str__(self):
-        return f'{self.name}'
-
-
-class Card(models.Model):
+class Card(TimeStampedModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
     infos = models.ManyToManyField(Info, blank=True)
 
-    name = models.CharField(max_length=180)
-    hint = models.CharField(max_length=60, blank=True)
+    name = models.TextField(_('name'), validators=[validators.card_name])
+    hint = models.TextField(_('hint'), blank=True)
+
+    objects = managers.CardSet.as_manager()
 
     def __str__(self):
         return f'{self.name}'
@@ -53,7 +81,7 @@ class Interaction(models.Model):
 
     time = models.DateTimeField(default=timezone.now)
 
-    objects = InteractionManager()
+    objects = managers.InteractionManager()
 
     class Meta:
         abstract = True

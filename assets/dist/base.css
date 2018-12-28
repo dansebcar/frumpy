@@ -1,0 +1,125 @@
+html {
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+button {
+  font: unset;
+  padding: 5px;
+  margin: 5px;
+  background-color: unset;
+  border: 1px solid #aaa;
+  border-radius: 2px;
+  box-shadow: 0 0 5px grey;
+  cursor: pointer;
+  user-select: none; }
+
+a {
+  text-decoration: none;
+  color: unset;
+  cursor: pointer; }
+
+ul {
+  margin: unset;
+  padding: unset;
+  list-style-type: none; }
+
+h1, h2, h3 {
+  margin: 10px; }
+
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 5px;
+  background-color: #eee;
+  border-bottom: 2px solid #aaa; }
+  .header::after {
+    content: "";
+    position: absolute;
+    box-shadow: 0 15px 15px -10px #aaa inset;
+    height: 15px;
+    left: 0;
+    right: 0;
+    bottom: -15px; }
+  .header__link {
+    border-radius: 3px;
+    padding: 3px;
+    min-width: 100px;
+    text-align: center;
+    border: 2px solid #aaa;
+    background-color: #eee;
+    user-select: none; }
+    .header__link[data-current] {
+      color: white;
+      background-color: #b366ff;
+      border-color: #8000ff; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  grid-template-areas: "head head head" ". main ." "foot foot foot";
+  grid-template-columns: 1fr minmax(auto, 1000px) 1fr;
+  grid-template-rows: auto 1fr auto;
+  font-family: "Computer Modern Sans", sans-serif; }
+
+.header {
+  grid-area: head; }
+
+#main {
+  position: relative;
+  grid-area: main;
+  padding: 10px 5px; }
+  @media (min-width: 1000px) {
+    #main::before {
+      content: "";
+      position: absolute;
+      box-shadow: -15px 0 15px -10px #aaa inset;
+      width: 15px;
+      top: 0;
+      bottom: 0;
+      left: -15px; }
+    #main::after {
+      content: "";
+      position: absolute;
+      box-shadow: 15px 0 15px -10px #aaa inset;
+      width: 15px;
+      top: 0;
+      bottom: 0;
+      right: -15px; } }
+
+.footer {
+  grid-area: foot; }
+
+.footer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 5px;
+  background-color: #eee;
+  border-top: 2px solid #aaa; }
+  .footer::after {
+    content: "";
+    position: absolute;
+    box-shadow: 0 -15px 15px -10px #aaa inset;
+    height: 15px;
+    left: 0;
+    right: 0;
+    top: -15px; }
+  .footer__link {
+    border-radius: 3px;
+    padding: 3px;
+    min-width: 100px;
+    text-align: center;
+    border: 2px solid #aaa;
+    background-color: #eee;
+    user-select: none; }
+    .footer__link[data-current] {
+      color: white;
+      background-color: #b366ff;
+      border-color: #8000ff; }
+

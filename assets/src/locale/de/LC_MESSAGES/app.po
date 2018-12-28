@@ -1,0 +1,83 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: easygettext\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/components/InfoPlaceholder.vue:19
+msgid "Add other languages for %{name}"
+msgstr "Andere sprachen für %{name} einfugen"
+
+#: src/components/TopicList.vue:10
+msgid "All"
+msgstr ""
+
+#: src/components/BaseModal.vue:12
+msgid "Cancel"
+msgstr "Löschen"
+
+#: src/components/InfoPlaceholder.vue:35
+msgid "Create"
+msgstr "Beschaffen"
+
+#: src/components/TopicItem.vue:7
+msgid "Create a new card"
+msgstr "Eine neue Karte beschaffen"
+
+#: src/components/CardPlaceholder.vue:7
+msgid "Create a new one"
+msgstr "Eine Neue beschaffen"
+
+#: src/components/InfoPlaceholder.vue:8
+msgid "Create new info"
+msgstr "Eine neue Info beschaffen"
+
+#: src/components/CardItem.vue:24
+msgid "Need a hint?"
+msgstr "Brauchen Sie einen Hinweis?"
+
+#: src/components/BasePagination.vue:7
+msgid "Next"
+msgstr "Weiter"
+
+#: src/components/CardItem.vue:38
+msgid "No"
+msgstr "Nein"
+
+#: src/components/CardPlaceholder.vue:17
+msgid "Please log in or sign up to view cards"
+msgstr "Bitte einloggen oder anmelden um Karten anzuschauen"
+
+#: src/components/BasePagination.vue:2
+msgid "Previous"
+msgstr "Zurück"
+
+#: src/components/CardForm.vue:19
+msgid "Save"
+msgstr "Speichern"
+
+#: src/components/TopicList.vue:26
+msgid "Search"
+msgstr "Suchen"
+
+#: src/components/CardItem.vue:44
+msgid "Show"
+msgstr "Zeigen"
+
+#: src/components/CardPlaceholder.vue:3
+msgid "There's none left!"
+msgstr "Es gibt noch keine!"
+
+#: src/components/CardPlaceholder.vue:13
+msgid "Welcome to Frumpy!"
+msgstr "Wilkommen"
+
+#: src/components/CardItem.vue:42
+msgid "Yes"
+msgstr "Ja"

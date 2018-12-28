@@ -26,7 +26,16 @@ class CardNameGenerator:
         return ' '.join(rnd.choice(k) for k in self.components)
 
 
+class TopicFactory(DjangoModelFactory):
+    name = Sequence(i18n('Topic %s-%s'))
+
+    class Meta:
+        model = Topic
+
+
 class InfoFactory(DjangoModelFactory):
+    user = Iterator(User.objects.all())
+
     name = Sequence(i18n('Info %s-%s'))
 
     class Meta:
@@ -48,3 +57,10 @@ class CardFactory(DjangoModelFactory):
             self.infos.add(info)
         for _ in range(rnd.randint(0, 2)):
             self.infos.add(InfoFactory())
+
+
+class UserFactory(DjangoModelFactory):
+    username = Sequence(lambda k: f'user {k}')
+
+    class Meta:
+        model = User

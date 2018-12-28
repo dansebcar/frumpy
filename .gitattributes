@@ -1,0 +1,2 @@
+assets/dist/** -diff
+assets/src/translations.json -diff

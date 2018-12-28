@@ -1,0 +1,103 @@
+.Log[data-v-70f055f0] {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  max-height: 60vh;
+  overflow-y: auto;
+  z-index: 10;
+}
+.info[data-v-70f055f0], .error[data-v-70f055f0], .success[data-v-70f055f0] {
+  margin: 5px;
+  padding: 3px;
+  border-radius: 5px;
+  font-size: 10px;
+  user-select: none;
+}
+.info[data-v-70f055f0] {
+  background-color: rgba(255, 238, 153, 0.8);
+  border: 2px solid rgba(255, 213, 0, 0.8);
+}
+.error[data-v-70f055f0] {
+  background-color: rgba(255, 153, 153, 0.8);
+  border: 2px solid rgba(255, 0, 0, 0.8);
+}
+.success[data-v-70f055f0] {
+  background-color: rgba(153, 255, 153, 0.8);
+  border: 2px solid rgba(0, 255, 0, 0.8);
+}
+
+.CardTemplate[data-v-2ecd4ada] {
+  contain: content;
+  width: calc(100% - 20px);
+  max-width: 600px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #b366ff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px grey;
+}
+.head[data-v-2ecd4ada] {
+  width: 100%;
+  background-color: #cc99ff;
+  display: block;
+  text-align: center;
+  font-size: 0.8em;
+}
+.body[data-v-2ecd4ada] {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+.foot[data-v-2ecd4ada] {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  border-top: 1px solid #b366ff;
+  background-color: #cc99ff;
+}
+
+.name[data-v-ecb6ae1a] span {
+  color: transparent;
+  user-select: none;
+  background-color: #aaa;
+}
+.infos[data-v-ecb6ae1a] {
+  padding: 5px;
+  margin: 5px;
+  list-style-type: square;
+}
+.controls[data-v-ecb6ae1a] {
+  width: 100%;
+  display: flex;
+}
+.show[data-v-ecb6ae1a], .fail[data-v-ecb6ae1a], .win[data-v-ecb6ae1a] {
+  flex: 1;
+  color: white;
+}
+.show[data-v-ecb6ae1a] {
+  background-color: #b366ff;
+}
+.fail[data-v-ecb6ae1a] {
+  background-color: red;
+}
+.win[data-v-ecb6ae1a] {
+  background-color: green;
+}
+
+.CardPlaceholder[data-v-307298c3] {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.App[data-v-617ab0be] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+

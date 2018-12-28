@@ -1,0 +1,41 @@
+$bp-s: 600px;
+$bp-l: 1000px;
+
+$gray-1: #f6f6f6;
+$gray-2: #eee;
+$gray-3: #aaa;
+
+@function get-color($lightness: 50%) {
+  @return hsl(270, 100%, $lightness);
+}
+
+$color-1: get-color(80%);
+$color-2: get-color(70%);
+$color-3: get-color();
+
+@mixin nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 5px;
+
+  background-color: $gray-2;
+
+  &__link {
+    border-radius: 3px;
+    padding: 3px;
+    min-width: 100px;
+
+    text-align: center;
+    border: 2px solid $gray-3;
+    background-color: $gray-2;
+
+    user-select: none;
+
+    &[data-current] {
+      color: white;
+      background-color: $color-2;
+      border-color: $color-3;
+    }
+  }
+}

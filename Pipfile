@@ -15,6 +15,10 @@ factory-boy = "*"
 django-cors-headers = "*"
 "django-i18nfield" = "*"
 pyyaml = "*"
+werkzeug = "*"
 
 [requires]
 python_version = "3.6"
+
+[dev-packages]
+isort = "*"

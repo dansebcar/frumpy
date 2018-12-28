@@ -1,0 +1,88 @@
+.Log[data-v-70f055f0] {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  max-height: 60vh;
+  overflow-y: auto;
+  z-index: 10;
+}
+.info[data-v-70f055f0], .error[data-v-70f055f0], .success[data-v-70f055f0] {
+  margin: 5px;
+  padding: 3px;
+  border-radius: 5px;
+  font-size: 10px;
+  user-select: none;
+}
+.info[data-v-70f055f0] {
+  background-color: rgba(255, 238, 153, 0.8);
+  border: 2px solid rgba(255, 213, 0, 0.8);
+}
+.error[data-v-70f055f0] {
+  background-color: rgba(255, 153, 153, 0.8);
+  border: 2px solid rgba(255, 0, 0, 0.8);
+}
+.success[data-v-70f055f0] {
+  background-color: rgba(153, 255, 153, 0.8);
+  border: 2px solid rgba(0, 255, 0, 0.8);
+}
+
+.BaseInput[data-v-2d998ef9] {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+}
+.label[data-v-2d998ef9] {
+  margin: 5px 0;
+}
+.label[data-v-2d998ef9]::first-letter {
+    text-transform: uppercase;
+}
+.input[data-v-2d998ef9] {
+  padding: 2px 5px;
+  border-radius: 10px;
+  border: 1px solid #aaa;
+  outline: unset;
+  font-size: 1.5em;
+}
+.input[data-v-2d998ef9]:focus {
+    border-color: orange;
+}
+
+.BaseModal[data-v-4930085c] {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border: 2px solid #aaa;
+}
+.foot[data-v-4930085c] {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+
+.infos[data-v-127579bc] {
+  margin-bottom: 10px;
+  padding-left: 11px;
+  list-style-type: square;
+}
+
+.CardForm[data-v-5fb0fa24] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.form[data-v-5fb0fa24] {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+}
+.submit[data-v-5fb0fa24] {
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #cc99ff;
+  border: 1px solid #8000ff;
+  border-radius: 5px;
+}
+
