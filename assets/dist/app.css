@@ -57,8 +57,8 @@
   width: 100%;
   display: flex;
   justify-content: space-evenly;
-  border-top: 1px solid #b366ff;
-  background-color: #cc99ff;
+  border-top: 1px solid #8000ff;
+  background-color: #eee;
 }
 
 .name[data-v-ecb6ae1a] span {

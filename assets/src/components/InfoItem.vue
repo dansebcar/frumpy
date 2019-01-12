@@ -8,7 +8,11 @@ export default {
 
 <template>
   <li
-  >{{ info.name }}</li>
+  >{{ info.name }}
+    <button
+      @click.prevent="$emit('remove', info)"
+    >&times;</button>
+  </li>
 </template>
 
 <style>

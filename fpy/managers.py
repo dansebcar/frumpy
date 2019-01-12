@@ -41,7 +41,7 @@ class CardSet(QuerySet):
                     user_interaction_count=0,
                     then=1,
                 ),
-                default=F('user_fail_count') / F('user_interaction_count'),
+                default=(F('user_fail_count') + 1) / (F('user_interaction_count') + 1),
             ),
         )
 

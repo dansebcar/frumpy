@@ -32,6 +32,7 @@ class DumpViewSet(
 
 class CardViewSet(
     mixins.CreateModelMixin,
+    mixins.UpdateModelMixin,
     mixins.ListModelMixin,
     SerializerDictMixin,
     GenericViewSet,

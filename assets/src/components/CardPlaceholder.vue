@@ -5,9 +5,6 @@ export default {
   components: {
     CardTemplate,
   },
-  props: {
-    topic: String,
-  },
 };
 </script>
 
@@ -18,10 +15,9 @@ export default {
         v-translate
         slot="head"
       >There's none left!</h1>
-      <a
+      <span
         v-translate
-        :href="$url(topic ? `topic/${topic}/card/` : 'topics/')"
-      >Create a new one</a>
+      >Create a new one</span>
     </CardTemplate>
     <CardTemplate v-else>
       <h1

@@ -65,7 +65,7 @@ class Migration(migrations.Migration):
                 ('level', models.CharField(choices=[('A1', 'A1 Breakthrough'), ('A2', 'A2 Waystage'), ('B1', 'B1 Threshold'), ('B2', 'B2 Vantage'), ('C1', 'C1 Proficiency'), ('C2', 'C2 Mastery')], max_length=2, verbose_name='level')),
             ],
             options={
-                'ordering': ['id'],
+                'ordering': ['level', 'id'],
             },
         ),
         migrations.CreateModel(

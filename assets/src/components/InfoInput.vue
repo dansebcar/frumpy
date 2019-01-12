@@ -1,22 +1,15 @@
 <script>
 import api from 'utils/api.js';
 import debounce from 'utils/debounce.js';
+import {formContextMixin} from 'utils/mixins.js';
 
 import BaseInput from './BaseInput.vue';
 import BaseModal from './BaseModal.vue';
 import InfoItem from './InfoItem.vue';
 import InfoAutocomplete from './InfoAutocomplete.vue';
 
-function* otherLanguages({current, available}) {
-  for (let code in available) {
-    if (code !== current) {
-      let name = available[code];
-      yield {code, name};
-    }
-  }
-}
-
 export default {
+  mixins: [formContextMixin],
   components: {
     BaseInput,
     BaseModal,
@@ -24,23 +17,18 @@ export default {
     InfoAutocomplete,
   },
   props: {
-    infos: Array,
+    field: Object,
   },
   data() {
     return {
       results: [],
       creating: false,
-      namesByLang: {},
+      form: this.getForm(),
     };
   },
   computed: {
-    info() {
-      return {
-        name: this.namesByLang,
-      };
-    },
-    otherLanguages() {
-      return [...otherLanguages(this.$language)];
+    infos() {
+      return this.field.value;
     },
     canCreate() {
       return this.query && this.results.length === 0;
@@ -48,13 +36,19 @@ export default {
     exclude() {
       return this.infos.map(k => k.id).join('-');
     },
-    query: {
-      get() {
-        return this.namesByLang[this.$language.current];
-      },
-      set(value) {
-        this.$set(this.namesByLang, this.$language.current, value);
-      },
+    query() {
+      return this.form[this.$language.current].value;
+    },
+    otherLanguages() {
+      let form = {};
+
+      for (let [name, field] of Object.entries(this.form)) {
+        if (name !== this.$language.current) {
+          form[name] = field;
+        }
+      }
+
+      return form;
     },
   },
   watch: {
@@ -74,22 +68,43 @@ export default {
     },
     async create() {
       if (this.creating) {
-        const info = await api('info/', {method: 'post', data: this.info});
+        const info = await api('info/', {method: 'post', data: {name: this.payload}});
 
         if (info) {
           const {id} = info;
-          this.$emit('select', {id, name: this.query});
+          this.$emit('update', {push: {id, name: this.query}});
           this.creating = false;
-          this.namesByLang = {};
+          this.form = this.getForm();
         }
       } else if (this.canCreate) {
         this.creating = true;
       }
     },
     select(info) {
-      this.namesByLang = {};
+      this.form = this.getForm();
       this.$refs.query.focus();
-      this.$emit('select', info);
+      this.$emit('update', {push: info});
+    },
+    remove({id}) {
+      this.$emit('update', {remove: id});
+    },
+    getForm() {
+      const form = {};
+      const langs = Object.entries(this.$language.available);
+
+      for (let [name, label] of langs) {
+        if (name === this.$language.current) {
+          label = this.field.label;
+        }
+
+        form[name] = {
+          name,
+          label,
+          value: '',
+        };
+      }
+
+      return form;
     },
   },
 };
@@ -99,9 +114,8 @@ export default {
   <div>
     <BaseInput
       ref="query"
-      v-model="query"
-      name="infos"
-      autocomplete="off"
+      :field="form[$language.current]"
+      @update="update"
     >
       <ul
         v-if="infos.length"
@@ -111,6 +125,7 @@ export default {
           v-for="info in infos"
           :key="info.id"
           :info="info"
+          @remove="remove"
         />
       </ul>
     </BaseInput>
@@ -130,13 +145,12 @@ export default {
       <ul
       >
         <li
-          v-for="lang in otherLanguages"
-          :key="lang.code"
+          v-for="(field, name) in otherLanguages"
+          :key="name"
         >
           <BaseInput
-            ref="other"
-            v-model="namesByLang[lang.code]"
-            :label="lang.name"
+            :field="field"
+            @update="update"
           />
         </li>
       </ul>

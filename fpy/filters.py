@@ -5,45 +5,75 @@ from rest_framework.filters import BaseFilterBackend
 search_param = settings.REST_FRAMEWORK['SEARCH_PARAM']
 
 
-class FieldFilter(BaseFilterBackend):
+class SimpleFilterBackend(BaseFilterBackend):
     field = None
 
-    def filter_queryset(self, request, queryset, view):
-        value = request.query_params.get(self.field)
+    @property
+    def value(self):
+        return self.request.query_params.get(self.field)
 
-        if value:
-            return queryset.filter(**{self.field: value})
+    def filter_queryset(self, *args):
+        self.request, self.queryset, self.view = args
+        result = self.filter()
+        if result is not None:
+            return result
+        return self.queryset
 
-        return queryset
+
+class FieldFilter(SimpleFilterBackend):
+    field = None
+
+    @property
+    def kwargs(self):
+        if self.value:
+            return {self.field: self.value}
+
+    def filter(self):
+        if self.kwargs:
+            return self.queryset.filter(**self.kwargs)
 
 
 class TopicFilter(FieldFilter):
     field = 'topic'
+
+    @property
+    def kwargs(self):
+        value = super().value
+        if value:
+            try:
+                value = int(value)
+            except ValueError:
+                return {'topic__level': value}
+
+            return {'topic': value}
 
 
 class LevelFilter(FieldFilter):
     field = 'level'
 
 
-class ExcludeFilter(BaseFilterBackend):
-    def filter_queryset(self, request, queryset, view):
-        exclude = request.query_params.get('exclude')
+class I18nSearchFilter(FieldFilter):
+    field = search_param
 
-        if exclude:
-            exclude = exclude.split('-')
-            return queryset.exclude(id__in=exclude)
-
-        return queryset
-
-
-class I18nSearchFilter(BaseFilterBackend):
-    def filter_queryset(self, request, queryset, view):
+    @property
+    def kwargs(self):
         lang = get_language()
-        search = request.query_params.get(search_param, '')
-        fields = getattr(view, 'i18n_search_fields', [])
-        return queryset.filter(
-            **{
-                f'{field}__{lang}__icontains': search
-                for field in fields
-            },
-        )
+        fields = getattr(self.view, 'i18n_search_fields', [])
+        return {
+            f'{field}__{lang}__icontains': self.value
+            for field in fields
+        }
+
+
+class ExcludeFilter(SimpleFilterBackend):
+    field = 'exclude'
+
+    @property
+    def value(self):
+        value = super().value
+        if value:
+            return value.split('-')
+
+    def filter(self):
+        if self.value:
+            return self.queryset.exclude(id__in=self.value)

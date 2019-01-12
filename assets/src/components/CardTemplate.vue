@@ -63,7 +63,7 @@ export default {};
   display: flex;
   justify-content: space-evenly;
 
-  border-top: 1px solid $color-2;
-  background-color: $color-1;
+  border-top: 1px solid $color-3;
+  background-color: $gray-2;
 }
 </style>

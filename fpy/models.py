@@ -49,7 +49,7 @@ class Topic(models.Model):
         return f'{self.name}'
 
     class Meta:
-        ordering = ['id']
+        ordering = ['level', 'id']
 
 
 class Info(TimeStampedModel):

@@ -32,18 +32,33 @@ class DumpSerializer(serializers.ModelSerializer):
 
     def __init__(self, *args, data=None, **kwargs):
         if data is not None:
-            return super().__init__(*args, data={'data': data}, **kwargs)
+            super().__init__(*args, data={'data': data}, **kwargs)
+        else:
+            super().__init__(*args, **kwargs)
 
-        return super().__init__(*args, **kwargs)
+
+class ContextModelSerializer(serializers.ModelSerializer):
+    @property
+    def form_context(self):
+        context = {}
+
+        for field_name, value in self.data.items():
+            field = self.Meta.model._meta.get_field(field_name)
+            context[field_name] = {
+                'name': field_name,
+                'label': str(field.verbose_name),
+                'value': value,
+            }
+
+        return context
 
 
 class TopicSerializer(serializers.ModelSerializer):
     level = serializers.CharField(source='get_level_display')
-    card_count = serializers.IntegerField()
 
     class Meta:
         model = Topic
-        fields = ['id', 'name', 'hint', 'level', 'card_count']
+        fields = ['id', 'name', 'hint', 'level']
 
 
 class InfoSerializer(serializers.ModelSerializer):
@@ -62,10 +77,15 @@ class InfoEditSerializer(serializers.ModelSerializer):
         fields = ['id', 'user', 'name']
 
 
-class CardEditSerializer(serializers.ModelSerializer):
-    topic = serializers.PrimaryKeyRelatedField(queryset=Topic.objects.all())
-    infos = serializers.PrimaryKeyRelatedField(queryset=Info.objects.all(), many=True)
+class CardContextSerializer(ContextModelSerializer):
+    infos = InfoSerializer(many=True)
 
+    class Meta:
+        model = Card
+        fields = ['id', 'name', 'hint', 'infos']
+
+
+class CardEditSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
     class Meta:

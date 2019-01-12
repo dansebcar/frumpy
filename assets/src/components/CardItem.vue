@@ -49,8 +49,11 @@ export default {
       <h1>
         {{ topic.name }}
       </h1>
-      <h3>
+      <h3 v-if="topic.hint">
         {{ topic.hint }}
+      </h3>
+      <h3 v-if="card.hint">
+        {{ card.hint }}
       </h3>
     </template>
     <div

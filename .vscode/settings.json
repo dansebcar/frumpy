@@ -1,4 +1,7 @@
 {
     "python.pythonPath": "/home/dan/.local/share/virtualenvs/dict-cc-D0ReOQxP/bin/python",
-    "python.linting.pylintEnabled": false
+    "python.linting.pylintEnabled": false,
+    "search.exclude": {
+        "/assets/dist": true
+    }
 }

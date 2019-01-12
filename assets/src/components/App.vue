@@ -17,7 +17,9 @@ export default {
 
     return {
       card: {},
-      topic: params.get('topic') || '',
+      params: {
+        topic: params.get('topic') || '',
+      },
     };
   },
   mounted() {
@@ -25,7 +27,8 @@ export default {
   },
   methods: {
     async feed(exclude = '') {
-      const data = await api(`card/feed/?topic=${this.topic}&exclude=${exclude}`);
+      const params = new URLSearchParams({exclude, ...this.params});
+      const data = await api(`card/feed/?${params}`);
       this.card = data;
     },
   },
@@ -42,7 +45,6 @@ export default {
     />
     <CardPlaceholder
       v-else
-      :topic="topic"
     />
     <LogLay />
   </div>

@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView
 
 from fpy import serializers
-from fpy.models import Topic
+from fpy.models import Topic, Card
 
 
 class WebpackView(TemplateView):
@@ -47,20 +47,18 @@ class CardForm(WebpackView):
         return serializers.TopicSerializer(topic)
 
     @property
-    def fields(self):
-        meta = serializers.CardEditSerializer.Meta
-        for name in meta.fields:
-            field = meta.model._meta.get_field(name)
-            yield [
-                name,
-                {
-                    'label': field.verbose_name,
-                },
-            ]
+    def card(self):
+        card = self.kwargs.get('card')
+        if card:
+            card = get_object_or_404(
+                Card,
+                id=card,
+            )
+        return serializers.CardContextSerializer(card)
 
     @property
     def extra_json_context(self):
         return {
             'topic': self.topic.data,
-            'fields': dict(self.fields),
+            'form': self.card.form_context,
         }

@@ -3,12 +3,14 @@ import LogLay from './LogLay.vue';
 
 import api from 'utils/api.js';
 import debounce from 'utils/debounce.js';
+import {formContextMixin} from 'utils/mixins.js';
 
 import BaseInput from './BaseInput.vue';
 import BasePagination from './BasePagination.vue';
 import TopicItem from './TopicItem.vue';
 
 export default {
+  mixins: [formContextMixin],
   components: {
     BaseInput,
     BasePagination,
@@ -17,14 +19,21 @@ export default {
   },
   data() {
     return {
-      query: '',
       level: '',
       results: [],
       count: 0,
       next: null,
       previous: null,
-      text: {
-        search: this.$gettext('Search'),
+      form: {
+        level: {
+          name: 'level',
+          value: '',
+        },
+        query: {
+          name: 'query',
+          label: this.$gettext('Search'),
+          value: '',
+        },
       },
     };
   },
@@ -36,11 +45,11 @@ export default {
   },
   computed: {
     params() {
-      return `q=${this.query}&level=${this.level}`;
-    }
+      return {q: this.form.query.value, level: this.form.level.value};
+    },
   },
   methods: {
-    async load(url = `topic/?${this.params}`) {
+    async load(url = `topic/?${new URLSearchParams(this.params)}`) {
       const data = await api(url);
 
       if (data) {
@@ -54,24 +63,32 @@ export default {
 <template>
   <div class="TopicList">
     <BaseInput
-      v-model="query"
-      :label="text.search"
+      :field="form.query"
       class="search"
+      @update="update"
     />
-    <select
-      v-model="level"
-      class="level"
-    >
-      <option
+    <div class="level">
+      <select
+        v-model="form.level.value"
+        class="level__select"
+      >
+        <option
+          v-translate
+          value=""
+        >All</option>
+        <option
+          v-for="[value, label] in $context.levels"
+          :key="value"
+          :value="value"
+        >{{ label }}</option>
+      </select>
+      <a
+        v-if="level"
         v-translate
-        value=""
-      >All</option>
-      <option
-        v-for="[value, label] in $context.levels"
-        :key="value"
-        :value="value"
-      >{{ label }}</option>
-    </select>
+        :href="$url(`?topic=${level}`)"
+        class="level__link"
+      >All</a>
+    </div>
     <TopicItem
       v-for="topic in results"
       :key="topic.id"
@@ -102,6 +119,16 @@ export default {
 .level {
   width: 100%;
   max-width: $bp-s;
-  font-size: 1.3em;
+  display: flex;
+  align-items: center;
+
+  &__select {
+    font-size: 1.3em;
+    flex: 1;
+  }
+
+  &__link {
+    margin: 0 10px;
+  }
 }
 </style>

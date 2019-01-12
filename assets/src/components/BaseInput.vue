@@ -1,31 +1,35 @@
 <script>
+let index = 0;
+
 export default {
   props: {
-    value: String,
-    name: String,
-    label: String,
-    attrs: Object,
+    type: {type: String, default: 'text'},
+    field: {type: Object, required: true},
+  },
+  data() {
+    return {
+      id: `input-${++index}`,
+    };
   },
   computed: {
-    id() {
-      const name = this.name;
-
-      if (name) {
-        return `id_${this.name}`;
-      }
+    name() {
+      return this.field.name;
     },
-    field() {
-      const fields = this.$context.fields || {};
-      return fields[this.name] || {};
+    label() {
+      return this.field.label;
     },
-    displayLabel() {
-      return this.label || this.field.label;
+    value() {
+      return this.field.value;
     },
   },
   methods: {
     focus() {
       this.$refs.input.focus();
     },
+    update(event) {
+      let value = event.target.value;
+      this.$emit('update', {name: this.name, value});
+    }
   },
 };
 </script>
@@ -33,18 +37,18 @@ export default {
 <template>
   <div class="BaseInput">
     <label
-      v-if="displayLabel"
+      v-if="label"
       :for="id"
       class="label"
-    >{{ displayLabel }}</label>
+    >{{ label }}</label>
     <slot />
     <input
       ref="input"
-      v-bind="$attrs"
       :id="id"
+      :name="name"
       :value="value"
       class="input"
-      @input="$emit('input', $event.target.value)"
+      @input="update"
     >
   </div>
 </template>

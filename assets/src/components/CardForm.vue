@@ -2,45 +2,42 @@
 import LogLay from './LogLay.vue';
 
 import api from 'utils/api.js';
+import context from 'utils/context.js';
+import {formContextMixin} from 'utils/mixins.js';
 
 import BaseInput from './BaseInput.vue';
 import InfoInput from './InfoInput.vue';
 
 export default {
+  mixins: [formContextMixin],
   components: {
     BaseInput,
     InfoInput,
     LogLay,
   },
   data() {
+    let {topic, form} = this.$context;
+
     return {
-      name: '',
-      hint: '',
-      infos: [],
+      topic,
+      form,
     };
-  },
-  computed: {
-    card() {
-      return {
-        name: this.name,
-        topic: this.topic.id,
-        infos: this.infos.map(k => k.id),
-      };
-    },
-    topic() {
-      return this.$context.topic;
-    },
   },
   methods: {
     async submit() {
-      const card = await api('card/', {method: 'post', data: this.card});
+      let id = this.form.id;
+      let payload = {...this.payload, topic: this.topic.id};
+      let card;
+
+      if (id) {
+        card = await api(`card/${id.value}/`, {method: 'put', data: payload});
+      } else {
+        card = await api('card/', {method: 'post', data: payload});
+      }
 
       if (card) {
-        document.location = this.$url();
+        // document.location = this.$url();
       }
-    },
-    push(info) {
-      this.infos.push(info);
     },
   },
 }
@@ -54,16 +51,16 @@ export default {
       @submit="submit"
     >
       <BaseInput
-        v-model="name"
-        name="name"
+        :field="form.name"
+        @update="update"
       />
       <BaseInput
-        v-model="hint"
-        name="hint"
+        :field="form.hint"
+        @update="update"
       />
       <InfoInput
-        :infos="infos"
-        @select="push"
+        :field="form.infos"
+        @update="updateList"
       />
       <button
         v-translate
