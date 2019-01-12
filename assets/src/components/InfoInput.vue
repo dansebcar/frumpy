@@ -1,7 +1,7 @@
 <script>
 import api from 'utils/api.js';
 import debounce from 'utils/debounce.js';
-import {formContextMixin} from 'utils/mixins.js';
+import formContextMixin from 'utils/form.js';
 
 import BaseInput from './BaseInput.vue';
 import BaseModal from './BaseModal.vue';
@@ -20,10 +20,25 @@ export default {
     field: Object,
   },
   data() {
+    const form = {};
+    const langs = Object.entries(this.$language.available);
+
+    for (let [name, label] of langs) {
+      if (name === this.$language.current) {
+        label = this.field.label;
+      }
+
+      form[name] = {
+        name,
+        label,
+        value: '',
+      };
+    }
+
     return {
+      form,
       results: [],
       creating: false,
-      form: this.getForm(),
     };
   },
   computed: {
@@ -68,43 +83,25 @@ export default {
     },
     async create() {
       if (this.creating) {
-        const info = await api('info/', {method: 'post', data: {name: this.payload}});
+        const info = await api('info/', {method: 'post', data: {name: this.form.payload}});
 
         if (info) {
           const {id} = info;
           this.$emit('update', {push: {id, name: this.query}});
           this.creating = false;
-          this.form = this.getForm();
+          this.form.reset();
         }
       } else if (this.canCreate) {
         this.creating = true;
       }
     },
     select(info) {
-      this.form = this.getForm();
+      this.form.reset();
       this.$refs.query.focus();
       this.$emit('update', {push: info});
     },
     remove({id}) {
       this.$emit('update', {remove: id});
-    },
-    getForm() {
-      const form = {};
-      const langs = Object.entries(this.$language.available);
-
-      for (let [name, label] of langs) {
-        if (name === this.$language.current) {
-          label = this.field.label;
-        }
-
-        form[name] = {
-          name,
-          label,
-          value: '',
-        };
-      }
-
-      return form;
     },
   },
 };

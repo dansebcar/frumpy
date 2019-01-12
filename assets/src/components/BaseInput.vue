@@ -1,15 +1,8 @@
 <script>
-let index = 0;
-
 export default {
   props: {
     type: {type: String, default: 'text'},
     field: {type: Object, required: true},
-  },
-  data() {
-    return {
-      id: `input-${++index}`,
-    };
   },
   computed: {
     name() {
@@ -20,6 +13,9 @@ export default {
     },
     value() {
       return this.field.value;
+    },
+    id() {
+      return this.field.id;
     },
   },
   methods: {

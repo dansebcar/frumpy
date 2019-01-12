@@ -3,7 +3,7 @@ import LogLay from './LogLay.vue';
 
 import api from 'utils/api.js';
 import context from 'utils/context.js';
-import {formContextMixin} from 'utils/mixins.js';
+import formContextMixin from 'utils/form.js';
 
 import BaseInput from './BaseInput.vue';
 import InfoInput from './InfoInput.vue';
@@ -26,7 +26,7 @@ export default {
   methods: {
     async submit() {
       let id = this.form.id;
-      let payload = {...this.payload, topic: this.topic.id};
+      let payload = {...this.form.payload, topic: this.topic.id};
       let card;
 
       if (id) {

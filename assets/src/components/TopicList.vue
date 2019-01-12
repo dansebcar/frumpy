@@ -3,7 +3,7 @@ import LogLay from './LogLay.vue';
 
 import api from 'utils/api.js';
 import debounce from 'utils/debounce.js';
-import {formContextMixin} from 'utils/mixins.js';
+import formContextMixin from 'utils/form.js';
 
 import BaseInput from './BaseInput.vue';
 import BasePagination from './BasePagination.vue';
@@ -26,11 +26,9 @@ export default {
       previous: null,
       form: {
         level: {
-          name: 'level',
           value: '',
         },
         query: {
-          name: 'query',
           label: this.$gettext('Search'),
           value: '',
         },

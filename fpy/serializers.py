@@ -45,7 +45,6 @@ class ContextModelSerializer(serializers.ModelSerializer):
         for field_name, value in self.data.items():
             field = self.Meta.model._meta.get_field(field_name)
             context[field_name] = {
-                'name': field_name,
                 'label': str(field.verbose_name),
                 'value': value,
             }
