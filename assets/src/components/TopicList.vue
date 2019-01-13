@@ -1,21 +1,18 @@
 <script>
-import LogLay from './LogLay.vue';
-
 import api from 'utils/api.js';
 import debounce from 'utils/debounce.js';
-import formContextMixin from 'utils/form.js';
+import {formMixin} from 'utils/form.js';
 
 import BaseInput from './BaseInput.vue';
 import BasePagination from './BasePagination.vue';
 import TopicItem from './TopicItem.vue';
 
 export default {
-  mixins: [formContextMixin],
+  mixins: [formMixin],
   components: {
     BaseInput,
     BasePagination,
     TopicItem,
-    LogLay,
   },
   data() {
     return {
@@ -63,7 +60,6 @@ export default {
     <BaseInput
       :field="form.query"
       class="search"
-      @update="update"
     />
     <div class="level">
       <select
@@ -81,9 +77,9 @@ export default {
         >{{ label }}</option>
       </select>
       <a
-        v-if="level"
+        v-if="form.level.value"
         v-translate
-        :href="$url(`?topic=${level}`)"
+        :href="$url(`?topic=${form.level.value}`)"
         class="level__link"
       >All</a>
     </div>
@@ -96,7 +92,6 @@ export default {
       v-bind="{previous, next}"
       @paginate="load"
     />
-    <LogLay />
   </div>
 </template>
 

@@ -1,19 +1,17 @@
 <script>
-import LogLay from './LogLay.vue';
-
 import api from 'utils/api.js';
 import context from 'utils/context.js';
-import formContextMixin from 'utils/form.js';
+import log from 'utils/log.js';
+import {formMixin} from 'utils/form.js';
 
 import BaseInput from './BaseInput.vue';
 import InfoInput from './InfoInput.vue';
 
 export default {
-  mixins: [formContextMixin],
+  mixins: [formMixin],
   components: {
     BaseInput,
     InfoInput,
-    LogLay,
   },
   data() {
     let {topic, form} = this.$context;
@@ -33,10 +31,11 @@ export default {
         card = await api(`card/${id.value}/`, {method: 'put', data: payload});
       } else {
         card = await api('card/', {method: 'post', data: payload});
-      }
 
-      if (card) {
-        // document.location = this.$url();
+        if (card) {
+          log.success(card);
+          this.form.reset();
+        }
       }
     },
   },
@@ -52,15 +51,12 @@ export default {
     >
       <BaseInput
         :field="form.name"
-        @update="update"
       />
       <BaseInput
         :field="form.hint"
-        @update="update"
       />
       <InfoInput
         :field="form.infos"
-        @update="updateList"
       />
       <button
         v-translate
@@ -68,7 +64,6 @@ export default {
         @click.prevent="submit"
       >Save</button>
     </form>
-    <LogLay />
   </div>
 </template>
 

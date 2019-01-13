@@ -1,8 +1,10 @@
 <script>
+import {fieldMixin} from 'utils/form.js';
+
 export default {
+  mixins: [fieldMixin],
   props: {
     type: {type: String, default: 'text'},
-    field: {type: Object, required: true},
   },
   computed: {
     name() {
@@ -10,9 +12,6 @@ export default {
     },
     label() {
       return this.field.label;
-    },
-    value() {
-      return this.field.value;
     },
     id() {
       return this.field.id;
@@ -23,9 +22,8 @@ export default {
       this.$refs.input.focus();
     },
     update(event) {
-      let value = event.target.value;
-      this.$emit('update', {name: this.name, value});
-    }
+      this.value = event.target.value;
+    },
   },
 };
 </script>

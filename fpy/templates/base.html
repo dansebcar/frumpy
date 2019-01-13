@@ -24,6 +24,8 @@
 
     {% include 'includes/footer.html' %}
 
+    <div id="log"></div>
+
     {{ json_context|json_script:'json_context' }}
     {% if extra_json_context %}
       {{ extra_json_context|json_script:'extra_json_context' }}

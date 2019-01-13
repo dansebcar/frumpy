@@ -94,6 +94,9 @@ body {
 .footer {
   grid-area: foot; }
 
+#log {
+  grid-area: main; }
+
 .footer {
   position: relative;
   display: flex;

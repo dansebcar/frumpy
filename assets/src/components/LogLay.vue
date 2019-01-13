@@ -24,9 +24,6 @@ export default {
       logs: {},
     };
   },
-  mounted() {
-    window.log = this;
-  },
   methods: {
     _add(message, level) {
       const id = this.id++;

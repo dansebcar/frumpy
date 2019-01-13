@@ -1,6 +1,7 @@
 import Cookie from 'js-cookie';
 
 import context from 'utils/context.js';
+import log from 'utils/log.js';
 
 const lang = document.documentElement.lang;
 const headers = {

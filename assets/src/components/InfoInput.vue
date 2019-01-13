@@ -1,7 +1,7 @@
 <script>
 import api from 'utils/api.js';
 import debounce from 'utils/debounce.js';
-import formContextMixin from 'utils/form.js';
+import {formMixin, fieldMixin} from 'utils/form.js';
 
 import BaseInput from './BaseInput.vue';
 import BaseModal from './BaseModal.vue';
@@ -9,15 +9,12 @@ import InfoItem from './InfoItem.vue';
 import InfoAutocomplete from './InfoAutocomplete.vue';
 
 export default {
-  mixins: [formContextMixin],
+  mixins: [formMixin, fieldMixin],
   components: {
     BaseInput,
     BaseModal,
     InfoItem,
     InfoAutocomplete,
-  },
-  props: {
-    field: Object,
   },
   data() {
     const form = {};
@@ -42,14 +39,11 @@ export default {
     };
   },
   computed: {
-    infos() {
-      return this.field.value;
-    },
     canCreate() {
       return this.query && this.results.length === 0;
     },
     exclude() {
-      return this.infos.map(k => k.id).join('-');
+      return this.value.map(k => k.id).join('-');
     },
     query() {
       return this.form[this.$language.current].value;
@@ -87,7 +81,7 @@ export default {
 
         if (info) {
           const {id} = info;
-          this.$emit('update', {push: {id, name: this.query}});
+          this.value.push({id, name: this.query});
           this.creating = false;
           this.form.reset();
         }
@@ -98,10 +92,15 @@ export default {
     select(info) {
       this.form.reset();
       this.$refs.query.focus();
-      this.$emit('update', {push: info});
+      this.value.push(info);
     },
     remove({id}) {
-      this.$emit('update', {remove: id});
+      for (let i = 0; i < this.value.length; i++) {
+        if (this.value[i].id === id) {
+          this.value.splice(i, 1);
+          break;
+        }
+      }
     },
   },
 };
@@ -112,14 +111,13 @@ export default {
     <BaseInput
       ref="query"
       :field="form[$language.current]"
-      @update="update"
     >
       <ul
-        v-if="infos.length"
+        v-if="value.length"
         class="infos"
       >
         <InfoItem
-          v-for="info in infos"
+          v-for="info in value"
           :key="info.id"
           :info="info"
           @remove="remove"
@@ -147,7 +145,6 @@ export default {
         >
           <BaseInput
             :field="field"
-            @update="update"
           />
         </li>
       </ul>

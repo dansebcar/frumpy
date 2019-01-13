@@ -49,33 +49,29 @@ class Form {
   }
 }
 
-export default {
+export const formMixin = {
   data() {
     return {
       form: {},
     };
   },
-  mounted() {
+  created() {
     this.form = new Form(this.form);
   },
-  methods: {
-    update({name, value}) {
-      this.$set(this.form[name], 'value', value);
-    },
-    updateList({name, push, remove}) {
-      let value = this.form['infos'].value;
+};
 
-      if (push) {
-        value.push(push);
-      }
-      if (remove) {
-        for (let i = 0; i < value.length; i++) {
-          if (value[i].id === remove) {
-            value.splice(i, 1);
-            break;
-          }
-        }
-      }
+export const fieldMixin = {
+  props: {
+    field: {type: Object, required: true},
+  },
+  computed: {
+    value: {
+      get() {
+        return this.field.value;
+      },
+      set(value) {
+        this.$set(this.field, 'value', value);
+      },
     },
   },
 };

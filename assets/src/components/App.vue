@@ -1,6 +1,4 @@
 <script>
-import LogLay from './LogLay.vue';
-
 import api from 'utils/api.js';
 
 import CardItem from './CardItem.vue';
@@ -10,7 +8,6 @@ export default {
   components: {
     CardItem,
     CardPlaceholder,
-    LogLay,
   },
   data() {
     const params = new URLSearchParams(location.search);
@@ -46,7 +43,6 @@ export default {
     <CardPlaceholder
       v-else
     />
-    <LogLay />
   </div>
 </template>
 
