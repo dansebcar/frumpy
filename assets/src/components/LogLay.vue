@@ -39,7 +39,7 @@ export default {
 </script>
 
 <template>
-  <div class="Log">
+  <div class="LogLay">
     <span
       v-for="({message, level}, id) in logs"
       :key="id"
@@ -51,7 +51,7 @@ export default {
 </template>
 
 <style scoped lang="scss">
-.Log {
+.LogLay {
   position: fixed;
   bottom: 0;
   display: flex;

@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
-from fpy import serializers, filters
+from fpy import filters, permissions, serializers
 from fpy.models import Dump, Card, Info, Topic, Win, Fail
 
 
@@ -42,7 +42,7 @@ class CardViewSet(
         'list': serializers.CardSerializer,
         'feed': serializers.CardSerializer,
     }
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, permissions.CardPermission]
     filter_backends = [
         filters.TopicFilter,
         filters.ExcludeFilter,

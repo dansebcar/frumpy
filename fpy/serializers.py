@@ -105,6 +105,7 @@ class CardSerializer(serializers.ModelSerializer):
 
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
+    user_can_edit = serializers.BooleanField()
     user_win_count = serializers.IntegerField()
     user_fail_count = serializers.IntegerField()
     latest_user_interaction = serializers.DateTimeField()
@@ -118,6 +119,7 @@ class CardSerializer(serializers.ModelSerializer):
             'topic',
             'user',
             'infos',
+            'user_can_edit',
             'user_win_count',
             'user_fail_count',
             'latest_user_interaction',

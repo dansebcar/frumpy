@@ -29,6 +29,7 @@ export default {
 
       if (id) {
         card = await api(`card/${id.value}/`, {method: 'put', data: payload});
+        log.success(card);
       } else {
         card = await api('card/', {method: 'post', data: payload});
 

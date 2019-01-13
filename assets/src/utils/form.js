@@ -1,9 +1,12 @@
+import clone from 'utils/clone.js';
+
 let index = 0;
 
 class Field {
   constructor(field) {
     Object.assign(this, field);
     this.index = ++index;
+    this.initial = clone(this.value);
   }
   get id() {
     return `${this.constructor.name}-${this.index}-${this.name}`;
@@ -26,7 +29,6 @@ class Form {
   constructor(fields) {
     for (let [name, field] of Object.entries(fields)) {
       field.name = name;
-      field.initial = field.value;
       this[name] = new Field(field);
     }
   }

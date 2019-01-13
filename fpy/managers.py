@@ -1,7 +1,7 @@
 from datetime import timedelta
 
 from django.db.models import (
-    Case, Count, F,
+    BooleanField, Case, Count, ExpressionWrapper, F,
     FilteredRelation, FloatField, Manager, Q, QuerySet, When
 )
 from django.db.models.aggregates import Max
@@ -19,6 +19,7 @@ class TopicSet(QuerySet):
 class CardSet(QuerySet):
     def interactions(self, user=None):
         return self.annotate(
+            user_can_edit=ExpressionWrapper(Q(user=user), output_field=BooleanField()),
             user_win=FilteredRelation('win', condition=Q(win__user=user)),
             user_fail=FilteredRelation('fail', condition=Q(fail__user=user)),
             user_win_count=Cast(Count('user_win'), output_field=FloatField()),
