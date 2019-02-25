@@ -13,5 +13,5 @@ router.register('topic', api.TopicViewSet, base_name='topic')
 router.register('info', api.InfoViewSet, base_name='info')
 
 urlpatterns = [
-    path(r'api/v1/', include(router.urls)),
+    path('', include(router.urls)),
 ]

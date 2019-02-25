@@ -4,10 +4,11 @@ from django.contrib import admin
 from django.urls import path
 
 urlpatterns = [
-    path('', include('fpy.urls.api', namespace='api')),
     *i18n_patterns(
-        path('', include('fpy.urls.site', namespace='fpy')),
+        path('', include('fpy.urls.site', namespace='site')),
     ),
+    path('api/v1/', include('fpy.urls.api', namespace='fpy')),
+    path('api/v1/', include('users.urls', namespace='users')),
     path('dcc/', include('dcc.urls', namespace='dcc')),
     path('admin/', admin.site.urls),
 ]

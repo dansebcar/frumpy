@@ -67,7 +67,7 @@ class ContextProcessor:
             'pages': map(
                 Page(request),
                 [
-                    (_('Home'), 'fpy:home'),
+                    (_('Home'), 'site:home'),
                     *self.auth_pages,
                 ],
             ),

@@ -3,7 +3,7 @@ url = "https://pypi.python.org/simple"
 verify_ssl = true
 
 [packages]
-django = "*"
+Django = "*"
 gunicorn = "*"
 django-heroku = "*"
 ipython = "*"
@@ -11,11 +11,11 @@ django-extensions = "*"
 pudb = "*"
 requests = "*"
 djangorestframework = "*"
-factory-boy = "*"
+factory_boy = "*"
 django-cors-headers = "*"
 "django-i18nfield" = "*"
-pyyaml = "*"
-werkzeug = "*"
+PyYAML = "*"
+Werkzeug = "*"
 
 [requires]
 python_version = "3.6"

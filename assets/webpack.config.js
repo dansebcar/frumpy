@@ -7,6 +7,8 @@ module.exports = {
   entry: {
     base: "./src/base.scss",
     app: "./src/app.js",
+    signup: "./src/signup.js",
+    login: "./src/login.js",
     topics: "./src/topics.js",
     'card-form': "./src/card-form.js",
   },

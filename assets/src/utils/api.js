@@ -12,7 +12,7 @@ const headers = {
 const {isAuthenticated} = context;
 
 export default async function api(url = null, {method = 'get', data = null} = {}) {
-  if (url && isAuthenticated) {
+  if (url) {
     const config = {method, headers};
 
     if (data) {
@@ -43,3 +43,5 @@ export default async function api(url = null, {method = 'get', data = null} = {}
   }
   return null;
 }
+
+window.api = api;

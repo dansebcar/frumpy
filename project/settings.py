@@ -36,9 +36,11 @@ INSTALLED_APPS = [
     # local
     'fpy.apps.FpyConfig',
     'dcc',
+    'users',
     # third party
     'django_extensions',
     'corsheaders',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -107,6 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'users.User'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
@@ -150,8 +153,7 @@ REST_FRAMEWORK = {
     'SEARCH_PARAM': 'q',
 }
 
-LOGIN_REDIRECT_URL = 'fpy:home'
-LOGOUT_REDIRECT_URL = 'fpy:home'
+LOGOUT_REDIRECT_URL = 'site:home'
 
 # CORS_ORIGIN_ALLOW_ALL = True
 

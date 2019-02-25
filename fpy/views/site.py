@@ -1,30 +1,20 @@
 from django.shortcuts import get_object_or_404
-from django.views.generic import TemplateView
 
 from fpy import serializers
 from fpy.models import Topic, Card
-
-
-class WebpackView(TemplateView):
-    template_name = 'base.html'
-
-    @property
-    def extra_json_context(self):
-        return {}
-
-    @property
-    def extra_context(self):
-        return {
-            'webpack': {
-                ext: f'{self.entry}.{ext}'
-                for ext in ['css', 'js']
-            },
-            'extra_json_context': self.extra_json_context,
-        }
+from fpy.views import WebpackView
 
 
 class App(WebpackView):
     entry = 'app'
+
+
+class SignupView(WebpackView):
+    entry = 'signup'
+
+
+class LoginView(WebpackView):
+    entry = 'login'
 
 
 class TopicList(WebpackView):
